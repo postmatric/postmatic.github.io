@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PostMatic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <style>
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #121212;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex-grow: 1;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px;
+    background-color: transparent;
+    position: relative;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    margin-left: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    position: relative;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: white;
+    left: 0;
+    bottom: -5px;
+    transition: width 0.3s ease, left 0.3s ease;
+}
+
+nav a:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 40px;
+    width: calc(100% - 80px);
+    height: 1px;
+    background-color: white;
+    transition: width 0.3s ease;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 30px;
+    background-color: transparent;
+    position: relative;
+    margin-top: 40px;
+}
+
+footer h1 {
+    margin: 0;
+    font-size: 15px;
+    text-align: center;
+}
+
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 40px;
+    width: calc(100% - 80px);
+    height: 1px;
+    background-color: white;
+    transition: width 0.3s ease;
+}
+
+.box-title {
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 0px;
+    color: #f0f0f0;
+}
+
+.rounded-box {
+    background-color: transparent;
+    border: 1px solid #f0f0f0;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: none;
+    margin: 10px 30px;
+}
+
+.rounded-box p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0;
+    margin-left: 5px;
+}
+
+.faq-box .answer {
+    font-size: 14px;
+    margin-left: 25px;
+}
+
+.faq-box p strong {
+    font-size: 16px;
+}
+
+#particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    opacity: 10%;
+}
+    </style>
+</head>
+<body>
+    <div id="particles"></div>
+    <header>
+        <h1>PostMatic</h1>
+        <nav>
+            <a href="#">
+                <i class="fa fa-user-circle"></i> Login
+            </a>
+            <a href="#">
+                <i class="fa fa-server"></i> Dashboard
+            </a>
+        </nav>
+    </header>
+
+    <main>
+        <h2 class="box-title">About</h2>
+        <div class="rounded-box faq-box">
+            <p>
+                Are you tired of manually sending messages in every server and channel? This Discord automation tool can send messages automatically for you 24/7 in every server and channel, with full customization.
+            </p>
+        </div>
+        <h2 class="box-title">Purchase</h2>
+        <div class="rounded-box faq-box">
+            <p>
+                Interested in purchasing this powerful tool? Reach out to me at kcztrrcm@anonaddy.me for more information and about price.
+            </p>
+        </div>
+        <h2 class="box-title">Features</h2>
+        <div class="rounded-box">
+            <p>
+                • Automatic Message Sending<br>
+                • Multiple Message Support<br>
+                • Multi-Server Capability<br>
+                • User-Friendly Interface<br>
+                • Full Customization<br>
+                • Your Data Safety<br>
+                • Custom Delays<br>
+                • 24/7 Running<br>
+                • No Tracking
+            </p>
+        </div>
+        <h2 class="box-title">FAQ</h2>
+        <div class="rounded-box faq-box">
+            <p class="question">► How do I get the token/server ID/channel ID?</p>
+            <p class="answer">◦ Search on YouTube for a tutorial.</p><br>
+            <p class="question">► Why does it require my token?</p>
+            <p class="answer">  ◦ We only require your token to send messages through it. We do not collect or steal your token.</p><br>
+            <p class="question">► I'm worried about my token.</p>
+            <p class="answer">◦ If you're worried about your token, you can create a new account.</p><br>
+            <p class="question">► Do I need to download it?</p>
+            <p class="answer">◦ No, you don't need to download it. It runs on our hosting.</p><br>
+            <p class="question">► Does it run 24/7?</p>
+            <p class="answer">◦ Yes, it runs 24/7.</p>
+        </div>
+    </main>
+
+    <footer>
+        <h1>© PostMatic : 2024 ©</h1>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js';
+            script.onload = () => {
+                function initializeParticles() {
+                    particlesJS("particles", {
+                        particles: {
+                            number: { value: 160, density: { enable: true, value_area: 800 } },
+                            color: { value: "#ffffff" },
+                            size: { value: 4, random: true },
+                            move: {
+                                enable: true,
+                                speed: 2,
+                                direction: "bottom",
+                                out_mode: "out"
+                            }
+                        },
+                        interactivity: { events: { resize: true } },
+                        retina_detect: true
+                    });
+                }
+
+                initializeParticles();
+
+                window.addEventListener('resize', () => {
+                    initializeParticles();
+                });
+            };
+            document.head.appendChild(script);
+        });
+    </script>
+</body>
+</html>
