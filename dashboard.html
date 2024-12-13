@@ -1,278 +1,545 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - PostMatic</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-
     <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #121212;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+      body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #121212;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-grow: 1;
+        min-height: calc(100vh - 100px);
+        box-sizing: border-box;
+      }
+      footer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px 30px;
+        background-color: transparent;
+        position: relative;
+        margin-top: auto;
+      }
+      footer h1 {
+        margin: 0;
+        font-size: 15px;
+        text-align: center;
+      }
+      footer::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 40px;
+        width: calc(100% - 80px);
+        height: 1px;
+        background-color: white;
+      }
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 30px;
+        background-color: transparent;
+        position: relative;
+      }
+      header::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 40px;
+        width: calc(100% - 80px);
+        height: 1px;
+        background-color: white;
+        transition: width 0.3s ease;
+      }
+      header h1 {
+        margin: 0;
+        font-size: 24px;
+        font-weight: 600;
+      }
+      nav {
+        display: flex;
+        align-items: center;
+      }
+      nav a {
+        text-decoration: none;
+        color: white;
+        margin-left: 20px;
+        font-size: 13px;
+        font-weight: 600;
+        position: relative;
+      }
+      nav a::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        background-color: white;
+        left: 0;
+        bottom: -5px;
+        transition: width 0.3s ease, left 0.3s ease;
+      }
+      nav a:hover::after {
+        width: 100%;
+        left: 0;
+      }
+      .dashboard-box h2 {
+        margin-top: 0;
+        margin-bottom: 20px;
+        font-size: 20px;
+        font-weight: 600;
+      }
+      .input-container {
+        margin-bottom: 15px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+      }
+      .input-container input,
+      .input-container button {
+        padding: 12px;
+        font-size: 16px;
+        border: 1px solid #f0f0f0;
+        border-radius: 8px;
+        background-color: transparent;
+        color: #f0f0f0;
+        flex: 1;
+        min-width: 100px;
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+      * {
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+      .submit-btn {
+        background-color: transparent;
+        border: 1px solid #f0f0f0;
+        color: #f0f0f0;
+        cursor: pointer;
+        transition: transform 0.3s ease, background-color 0.3s ease;
+      }
+      .submit-btn:hover {
+        background-color: #00000022;
+        transform: scale(1.005);
+      }
+      .dashboard-box {
+  background-color: #2222223b;
+  border: 1px solid #f0f0f0;
+  padding: 20px 0px 20px 0px;
+  border-radius: 15px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+  width: 500px;
+  text-align: center;
+  margin: 40px;
+  height: 450px;
+  display: flex;
+  flex-direction: column;
+  position: relative; 
+  backdrop-filter: blur(3px);
+}
+#add-channel-btn {
+  position: absolute;
+  top: 18px;
+  right: 17px;
+  padding: 5px 7px;
+  font-size: 15px;
+  font-weight: 600;
+  background-color: transparent;
+  color: white;
+  border: 1px solid #f0f0f0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+#add-channel-btn:hover {
+  background-color: #00000022;
+  transform: scale(1.05);
+}
+.scroll-box {
+        min-height: 100px;
+        overflow-y: auto;
+        margin-bottom: 20px;
+        transition: margin-left 0.3s ease;
+      }
+.nav-section {
+  margin-top: auto; 
+  display: flex;
+  justify-content: center;
+}
+.nav-section button {
+  background-color: #333;
+  border: none;
+  color: white;
+  margin: 0 10px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.nav-section button:hover {
+  background-color: #555;
+}
+      #particles {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        pointer-events: none;
+        opacity: 10%;
+      }
+      .modal-content {
+        background-color: #222;
+        padding: 0px 20px 20px 20px;
+        border-radius: 10px;
+        width: 300px;
+        max-width: 100%;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        box-sizing: border-box;
+      }
+      .modal-content input,
+      .modal-content textarea {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+        border: 1px solid #f0f0f0;
+        border-radius: 8px;
+        background-color: transparent;
+        color: #f0f0f0;
+        box-sizing: border-box;
+        transition: transform 0.3s ease, background-color 0.3s ease;
+        text-align: center;
+      }
+      .modal-content input {
+        height: 35px;
+        margin-bottom: 10px;
+      }
+      .modal-content textarea {
+        height: 100px;
+        resize: none;
+      }
+      .modal-content button {
+        background-color: transparent;
+        border: none;
+        color: white;
+        padding: 12px 20px;
+        font-size: 16px;
+        margin-top: 10px;
+        margin-bottom: 2px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        box-sizing: border-box;
+        border: 1px solid #f0f0f0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: 400;
+      }
+      .modal-content button:hover,
+      .modal-content textarea:hover,
+      .modal-content input:hover {
+        background-color: #00000022;
+        transform: scale(1.005);
+      }
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.8);
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        backdrop-filter: blur(3px);
+        animation: fadeOut 0.3s forwards;
+      }
+      .modal.show {
+        display: flex;
+        animation: fadeIn 0.3s forwards;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
         }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 30px;
-            background-color: transparent;
-            position: relative;
+        to {
+          opacity: 1;
         }
-
-        header h1 {
-            margin: 0;
-            font-size: 24px;
-            font-weight: 600;
+      }
+      @keyframes fadeOut {
+        from {
+          opacity: 1;
         }
-
-        nav {
-            display: flex;
-            align-items: center;
+        to {
+          opacity: 0;
         }
-
-        nav a {
-            text-decoration: none;
-            color: white;
-            margin-left: 20px;
-            font-size: 13px;
-            font-weight: 600;
-            position: relative;
+      }
+      .modal-content {
+        background-color: #181818;
+        padding: 0px 20px 20px 20px;
+        border-radius: 10px;
+        width: 300px;
+        max-width: 100%;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        box-sizing: border-box;
+        animation: slideOut 0.3s forwards;
+      }
+      .modal.show .modal-content {
+        animation: slideIn 0.3s forwards;
+      }
+      @keyframes slideIn {
+        from {
+          transform: translateY(-30px);
+          opacity: 0;
         }
-
-        header::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 40px;
-            width: calc(100% - 80px);
-            height: 1px;
-            background-color: white;
-            transition: width 0.3s ease;
+        to {
+          transform: translateY(0);
+          opacity: 1;
         }
-
-        main {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-grow: 1;
-            min-height: calc(100vh - 100px);
-            box-sizing: border-box;
-        } 
-
-        .dashboard-box {
-            background-color: #2222223b;
-            border: 1px solid #f0f0f0;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
-            width: 500px;
-            text-align: center;
+      }
+      @keyframes slideOut {
+        from {
+          transform: translateY(0);
+          opacity: 1;
         }
-
-        .dashboard-box h2 {
-            margin-bottom: 20px;
-            font-size: 20px;
-            font-weight: 600;
+        to {
+          transform: translateY(-30px);
+          opacity: 0;
         }
-
-        .input-container {
-            margin-bottom: 15px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-        }
-
-        .input-container input,
-        .input-container button {
-            padding: 12px;
-            font-size: 16px;
-            border: 1px solid #f0f0f0;
-            border-radius: 8px;
-            background-color: transparent;
-            color: #f0f0f0;
-            flex: 1;
-            min-width: 200px;
-        }
-
-        @media (min-width: 600px) {
-            .input-container button {
-                flex: 0 1 auto;
-                max-width: 150px;
-            }
-        }
-
-        @media (max-width: 500px) {
-            .input-container button {
-                margin-bottom: 15px;
-            }
-        }
-
-        .input-container input:focus {
-            outline: none;
-            border-color: #00c8ff;
-        }
-
-        .submit-btn {
-            background-color: transparent;
-            border: 1px solid #f0f0f0;
-            color: #f0f0f0;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .submit-btn:hover {
-            background-color: #2222223b;
-            border-color: #00c8ff;
-        }
-
-        .nav-section {
-            margin-top: 30px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .nav-section button {
-            background-color: #333;
-            border: none;
-            color: white;
-            margin: 0 10px;
-            padding: 10px 20px;
-            font-size: 14px;
-            font-weight: 600;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .nav-section button:hover {
-            background-color: #555;
-        }
-
-        footer {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 10px 30px;
-            background-color: transparent;
-            position: relative;
-            margin-top: 40px;
-        }
-
-        footer h1 {
-            margin: 0;
-            font-size: 15px;
-            text-align: center;
-        }
-
-        footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 40px;
-            width: calc(100% - 80px);
-            height: 1px;
-            background-color: white;
-            transition: width 0.3s ease;
-        }
-
-        #particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            pointer-events: none;
-            opacity: 10%;
-        }
+      }
+      ::-webkit-scrollbar {
+        width: 7px;
+      }
+      ::-webkit-scrollbar-track {
+        border-radius: 25px;
+      }
+      ::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background: linear-gradient(to top, rgba(45, 45, 45, 0.4), rgba(65, 65, 65, 0.4) 40%, rgba(90, 90, 90, 0.4) 70%, rgba(55, 55, 55, 0.4));
+      }
+      .force-overflow {
+        min-height: 450px;
+      }
+      .close-btn {
+        font-size: 20px;
+        color: #f0f0f0;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        position: absolute;
+        right: 5px;
+        font-weight: 600;
+        transition: transform 0.3s ease, color 0.3s ease;
+      }
+      .close-btn i {
+        pointer-events: none;
+      }
+      .close-btn:hover {
+        transform: scale(1.1);
+      }
+      .close-btn:focus {
+        outline: none;
+      }
+#Name {
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  width: 80% !important;  
+  padding: 0 !important;
+  border: none !important;  
+  background: transparent !important; 
+  outline: none !important;  
+  margin-top: 10px !important;
+  display: block !important;  
+  margin-left: auto !important;  
+  margin-right: auto !important;  
+}
+#Name:focus {
+  transform: none !important; 
+  border: none !important;    
+}
+#Name::placeholder {
+  color: inherit !important;
+}
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div id="particles"></div>
     <header>
-        <h1 onclick="window.location.href='/'">PostMatic</h1>
-        <nav>
-            <a href="#"><i class="fas fa-home"></i> Home</a>
-            <a href="#"><i class="fas fa-cog"></i> Settings</a>
-        </nav>
+      <h1 onclick="window.location.href='/'">PostMatic</h1>
+      <nav>
+        <a href="#">
+          <i class="fas fa-home"></i> Home </a>
+        <a href="/logout">
+          <i class="fas fa-sign-out-alt"></i> Logout </a>
+      </nav>
     </header>
-
     <main>
-        <div class="dashboard-box">
-            <h2>Dashboard</h2>
-            <div class="input-container">
-                <input placeholder="Token" required>
-                <button class="submit-btn">Save</button>
-            </div>
-            <div class="input-container">
-                <input placeholder="Token" required>
-                <button class="submit-btn">Save</button>
-            </div>
-            <div class="input-container">
-                <input placeholder="Token" required>
-                <button class="submit-btn">Save</button>
-            </div>
-            <div class="input-container">
-                <input placeholder="Token" required>
-                <button class="submit-btn">Save</button>
-            </div>
-            <div class="input-container">
-                <input placeholder="Token" required>
-                <button class="submit-btn">Save</button>
-            </div>
-
-            <div class="nav-section">
-                <button>menu</button>
-                <button>setup</button>
-                <button>place</button>
-            </div>
+      <div class="dashboard-box">
+        <button id="add-channel-btn"><i class="fas fa-plus-circle"></i></button>
+        <h2>Channels</h2>
+        <div class="scroll-box" id="channels-container">
         </div>
+        <div class="nav-section">
+          <button>Channels</button>
+          <button>Setup</button>
+          <button>Console</button>
+        </div>
+      </div>
     </main>
-
     <footer>
-        <h1>© PostMatic : 2024 ©</h1>
+      <h1>© PostMatic : 2024 ©</h1>
     </footer>
-
+    <div id="edit-modal" class="modal">
+      <div class="modal-content">
+        <span id="close-modal" class="close-btn">
+          <i class="fas fa-times"></i>
+        </span>
+        <input id="Name" placeholder="New Channel" maxlength="25">
+        <input id="new-channel-id" placeholder="Enter Channel-ID">
+        <input id="new-time" placeholder="Enter Time(Secs)">
+        <textarea id="new-message" placeholder="Enter Message"></textarea>
+        <button id="save-changes">Save Changes</button>
+        <button id="delete-channel">Delete</button>
+      </div>
+    </div>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const script = document.createElement('script');
-            script.src = 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js';
-            script.onload = () => {
-                function initializeParticles() {
-                    particlesJS("particles", {
-                        particles: {
-                            number: { value: 160, density: { enable: true, value_area: 800 } },
-                            color: { value: "#ffffff" },
-                            size: { value: 4, random: true },
-                            move: {
-                                enable: true,
-                                speed: 2,
-                                direction: "bottom",
-                                out_mode: "out"
-                            }
-                        },
-                        interactivity: { events: { resize: true } },
-                        retina_detect: true
-                    });
-                }
-
-                initializeParticles();
-
-                window.addEventListener('resize', () => {
-                    initializeParticles();
-                });
-            };
-            document.head.appendChild(script);
-        });
-    </script>
-</body>
+document.addEventListener('DOMContentLoaded', () => {
+  const addChannelBtn = document.getElementById('add-channel-btn');
+  const channelsContainer = document.getElementById('channels-container');
+  const modal = document.getElementById('edit-modal');
+  const closeModalBtn = document.getElementById('close-modal');
+  const saveChangesBtn = document.getElementById('save-changes');
+  const deleteChannelBtn = document.getElementById('delete-channel');
+  const newChannelIdInput = document.getElementById('new-channel-id');
+  const newTimeInput = document.getElementById('new-time');
+  const newMessageInput = document.getElementById('new-message');
+  let channelCount = parseInt(localStorage.getItem('channelCount')) || 0;
+  let currentChannel = null;
+  function renderChannels() {
+    channelsContainer.innerHTML = '';
+    for (let i = 1; i <= channelCount; i++) {
+      const channelId = localStorage.getItem(`channel-${i}-id`);
+      if (channelId) {
+        const inputContainer = document.createElement('div');
+        inputContainer.className = 'input-container';
+        const channelBtn = document.createElement('button');
+        channelBtn.className = 'submit-btn';
+        channelBtn.id = `edit-btn-${i}`;
+        channelBtn.textContent = channelId;
+        channelBtn.addEventListener('click', () => openModal(i));
+        inputContainer.appendChild(channelBtn);
+        channelsContainer.appendChild(inputContainer);
+      }
+    }
+  }
+  function addChannel() {
+    channelCount++;
+    const newChannelId = `Channel-${channelCount}`;
+    localStorage.setItem(`channel-${channelCount}-id`, newChannelId);
+    localStorage.setItem(`channel-${channelCount}-time`, '');
+    localStorage.setItem(`channel-${channelCount}-message`, '');
+    localStorage.setItem('channelCount', channelCount);
+    renderChannels();
+  }
+  function openModal(channelIndex) {
+    currentChannel = channelIndex;
+    const channelData = loadChannelData(channelIndex);
+    newChannelIdInput.value = channelData.channelId;
+    newTimeInput.value = channelData.time;
+    newMessageInput.value = channelData.message;
+    modal.style.display = 'flex';
+    modal.classList.add('show');
+  }
+  function closeModal() {
+    modal.classList.remove('show');
+    setTimeout(() => {
+      modal.style.display = 'none';
+    }, 300);
+  }
+  function loadChannelData(channelIndex) {
+    return {
+      channelId: localStorage.getItem(`channel-${channelIndex}-id`),
+      time: localStorage.getItem(`channel-${channelIndex}-time`),
+      message: localStorage.getItem(`channel-${channelIndex}-message`),
+    };
+  }
+  function saveChanges() {
+    localStorage.setItem(`channel-${currentChannel}-id`, newChannelIdInput.value.trim());
+    localStorage.setItem(`channel-${currentChannel}-time`, newTimeInput.value.trim());
+    localStorage.setItem(`channel-${currentChannel}-message`, newMessageInput.value.trim());
+    closeModal();
+    renderChannels();
+  }
+  function deleteChannel() {
+    localStorage.removeItem(`channel-${currentChannel}-id`);
+    localStorage.removeItem(`channel-${currentChannel}-time`);
+    localStorage.removeItem(`channel-${currentChannel}-message`);
+    closeModal();
+    renderChannels();
+  }
+  addChannelBtn.addEventListener('click', addChannel);
+  closeModalBtn.addEventListener('click', closeModal);
+  saveChangesBtn.addEventListener('click', saveChanges);
+  deleteChannelBtn.addEventListener('click', deleteChannel);
+  window.addEventListener('click', (event) => {
+    if (event.target === modal) closeModal();
+  });
+  const script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js';
+  script.onload = () => {
+    particlesJS('particles', {
+      particles: {
+        number: { value: 160, density: { enable: true, value_area: 800 } },
+        color: { value: '#ffffff' },
+        size: { value: 4, random: true },
+        move: { enable: true, speed: 2, direction: 'bottom', out_mode: 'out' },
+      },
+      interactivity: { events: { resize: true } },
+      retina_detect: true,
+    });
+  };
+  document.head.appendChild(script);
+  const scrollBox = document.querySelector('.scroll-box');
+function adjustMargin() {
+  scrollBox.style.marginLeft = scrollBox.scrollHeight > scrollBox.clientHeight ? '7px' : '0px';
+}
+window.addEventListener('load', () => {
+  adjustMargin();
+});
+window.addEventListener('resize', adjustMargin);
+  renderChannels();
+});
+</script>
+  </body>
 </html>
